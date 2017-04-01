@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/iconfont.css">
+<script src='js/angular.min.js'></script>
+
+<body ng-controller='c'>
+	<section class="box-out iconfont">
+		<div class="zhe" ng-show='flag' ng-click='flag=false'></div>
+		<div class="left">
+			<div class="top">
+				<span>iCold</span>提醒事项&#xe64b;
+				<div ng-click='add()'>
+					<div class="xian"></div>
+					<div class="xian"></div>
+				</div>
+			</div>
+			<ul>
+				<li><span>&#xe69c;</span>已计划</li>
+				<!-- 新建列表 -->
+				<li ng-repeat='v in data' ng-click='bn($index)' ng-style="{color:v.color,background:$index==index?'#272822':''}">
+					<span ng-style="{background:v.color}"></span>
+					{{v.title}}
+					<div>&#xe600;</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right">
+			<div class="top">
+				<input type="text" class="text" placeholder='搜索所有提醒'>
+				<div class="you">
+					王雨&#xe64b;<span class='ss'>&#xe65e;</span>
+				</div>
+				<div class="ding">&#xe601;</div>
+			</div>
+			<ul class="ssa">
+				<li>
+					<span class='zuo' ng-style="{color:data[index].color}">
+						{{data[index].title}}
+					</span>
+					<div class='you'>
+						<span ng-click='btn()' ng-style="{color:data[index].color}">选项</span>
+						<div class="din" ng-show='flag'>
+							<div class="tops">
+								<input type="text" ng-style='{color:changeColor}' ng-model='changeTitle'>
+								<p >列表</p>
+								<div class="se" ng-repeat='v in color' style="background-color:{{v}}" ng-click='xy(v)' ng-style="{borderColor:changeColor==v?v:''}"></div>
+							</div>
+							<div class="xia">
+								<span class='zz' ng-click='del()'>删除</span>
+								<div class="rights">
+									<span class='ee' ng-click='flag=false'>取消</span>
+									<span class='dd' ng-click='wc()'>完成</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<ul class="ee">
+				<li>已完成:{{(data[index].date|filter:{done:true}).length}}项
+					<div class="san" ng-click='flg=!flg'></div>
+				</li>
+				<li ng-repeat='v in data[index].date|filter:{done:true}' ng-show=flg>
+					<span ng-blur='xg($event,v,$index)'>{{v.t}}</span>
+					<div class="yuans" ng-style="{borderColor:data[index].color,backgroundColor:data[index].color}" ng-click='xia(v)'></div>
+				</li>
+			</ul>
+			<ul >
+				<li ng-repeat='v in data[index].date|filter:{done:false}'>
+					<span ng-blur='xg($event,v,$index)' contenteditable=true style='outline:none,margin-left:20px;'>{{v.t}}</span>
+					<div class="yuans" ng-style="{borderColor:data[index].color}" ng-click='shang(v)'></div>
+				</li>
+				<!-- <li class="active">
+					<input type="text">
+					<div></div>
+				</li> -->
+				<li ng-click='adds()'>新项目...</li>
+			</ul>
+		</div>
+	</section>
+	<script src="js/index.js"></script>
+</body>
+</html>
